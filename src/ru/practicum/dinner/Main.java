@@ -1,8 +1,6 @@
 package ru.practicum.dinner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -52,24 +50,28 @@ public class Main {
         int numberOfCombos = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
-        String nextItem = scanner.nextLine().trim();
+        String nextItem = scanner.nextLine();
         List<String> dishTypes = new ArrayList<>();
         while (!nextItem.isEmpty()) {
             if (dc.chekIsDishTypeInMap(nextItem)) {
                 dishTypes.add(nextItem);
             } else {
-                System.out.println("Такого типа блдюда нет в программе! Попробуйте снова.");
+                System.out.println("Такого типа блдюда нет в списке! Попробуйте снова.");
+                nextItem = scanner.nextLine();
+                continue;
             }
-            nextItem = scanner.nextLine().trim();
+            nextItem = scanner.nextLine();
         }
         printResultList(dishTypes, numberOfCombos);
     }
 
-    private static void printResultList(List<String> dishTypes, int numberOfCombos){
-        List<List<String>> resultList = dc.getDishCombo(dishTypes, numberOfCombos);
-        for (int i = 0; i < resultList.size() ; i++) {
-            System.out.println("Комбо " + (i + 1));
-            System.out.println(resultList.get(i).toString());
-            }
+    private static void printResultList(List<String> dishTypes, int numberOfCombos) {
+        Set<List<String>> resultList = dc.getDishCombo(dishTypes, numberOfCombos);
+        int counter = 1;
+        for (List<String> list : resultList) {
+            System.out.println("Комбо " + counter);
+            System.out.println(list.toString());
+            counter++;
+        }
     }
 }
