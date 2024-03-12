@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c78bf3ef-bdcd-4fc0-8742-c9560a0f2036" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/ru/practicum/dinner/DinnerConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/practicum/dinner/DinnerConstructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ru/practicum/dinner/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ru/practicum/dinner/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="c78bf3ef-bdcd-4fc0-8742-c9560a0f2036" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1710246260526</updated>
       <workItem from="1710246264772" duration="40000" />
-      <workItem from="1710246313667" duration="11806000" />
+      <workItem from="1710246313667" duration="13011000" />
     </task>
     <servers />
   </component>
