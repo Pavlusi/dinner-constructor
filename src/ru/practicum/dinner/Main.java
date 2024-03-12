@@ -15,7 +15,7 @@ public class Main {
 
         while (true) {
             printMenu();
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().trim();
 
             switch (command) {
                 case "1":
@@ -40,15 +40,10 @@ public class Main {
 
     private static void addNewDish() {
         System.out.println("Введите тип блюда:");
-        String dishType = scanner.nextLine();
+        String dishType = scanner.nextLine().trim();
         System.out.println("Введите название блюда:");
-        String dishName = scanner.nextLine();
-        if (dc.chekIsDishInList(dishType, dishName)) {
-            System.out.println("Такое блюдо уже есть в этой категории");
-        } else {
+        String dishName = scanner.nextLine().trim();
         dc.addNewDish(dishType, dishName);
-        System.out.println("Блюдо " + dishName + "добавленно в категорию " + dishType);
-        }
     }
 
     private static void generateDishCombo() {
@@ -57,17 +52,20 @@ public class Main {
         int numberOfCombos = scanner.nextInt();
         scanner.nextLine();
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
-        String nextItem = scanner.nextLine();
+        String nextItem = scanner.nextLine().trim();
         List<String> dishTypes = new ArrayList<>();
         while (!nextItem.isEmpty()) {
             if (dc.chekIsDishTypeInMap(nextItem)) {
                 dishTypes.add(nextItem);
             } else {
                 System.out.println("Такого типа блдюда нет в программе! Попробуйте снова.");
-                return;
             }
-            nextItem = scanner.nextLine();
+            nextItem = scanner.nextLine().trim();
         }
+        printResultList(dishTypes, numberOfCombos);
+    }
+
+    private static void printResultList(List<String> dishTypes, int numberOfCombos){
         List<List<String>> resultList = dc.getDishCombo(dishTypes, numberOfCombos);
         for (int i = 0; i < resultList.size() ; i++) {
             System.out.println("Комбо " + (i + 1));
