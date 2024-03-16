@@ -4,16 +4,16 @@ import java.util.*;
 
 public class Main {
 
-    static DinnerConstructor dc;
-    static Scanner scanner;
+    private static DinnerConstructor dinnerConstructor;
+    private static Scanner scanner;
 
     public static void main(String[] args) {
-        dc = new DinnerConstructor();
+        dinnerConstructor = new DinnerConstructor();
         scanner = new Scanner(System.in);
 
         while (true) {
             printMenu();
-            String command = scanner.nextLine().trim();
+            String command = scanner.nextLine();
 
             switch (command) {
                 case "1":
@@ -23,8 +23,7 @@ public class Main {
                     generateDishCombo();
                     break;
                 case "3":
-                    //return;
-                    dc.printMap();
+                    return;
             }
         }
     }
@@ -38,10 +37,15 @@ public class Main {
 
     private static void addNewDish() {
         System.out.println("Введите тип блюда:");
-        String dishType = scanner.nextLine().trim();
+        String dishType = scanner.nextLine();
         System.out.println("Введите название блюда:");
-        String dishName = scanner.nextLine().trim();
-        dc.addNewDish(dishType, dishName);
+        String dishName = scanner.nextLine();
+        if (dinnerConstructor.chekIsDishTypeInMap(dishType) && dinnerConstructor.chekIsDishInList(dishType,dishName)) {
+            System.out.println("Блюдо " + dishName + " типа " + dishType + " уже есть в программе." + "\n");
+        } else {
+            dinnerConstructor.addNewDish(dishType, dishName);
+            System.out.println("Блюдо " + dishName + " добавленно в категорию " + dishType + "\n");
+        }
     }
 
     private static void generateDishCombo() {
@@ -53,12 +57,11 @@ public class Main {
         String nextItem = scanner.nextLine();
         List<String> dishTypes = new ArrayList<>();
         while (!nextItem.isEmpty()) {
-            if (dc.chekIsDishTypeInMap(nextItem)) {
+            if (dinnerConstructor.chekIsDishTypeInMap(nextItem)) {
                 dishTypes.add(nextItem);
             } else {
-                System.out.println("Такого типа блдюда нет в списке! Попробуйте снова.");
-                nextItem = scanner.nextLine();
-                continue;
+                System.out.println("Такого типа блдюда нет в программе: " + nextItem  + "\n");
+                return;
             }
             nextItem = scanner.nextLine();
         }
@@ -66,12 +69,10 @@ public class Main {
     }
 
     private static void printResultList(List<String> dishTypes, int numberOfCombos) {
-        Set<List<String>> resultList = dc.getDishCombo(dishTypes, numberOfCombos);
-        int counter = 1;
-        for (List<String> list : resultList) {
-            System.out.println("Комбо " + counter);
-            System.out.println(list.toString());
-            counter++;
+        List<List<String>> resultList = dinnerConstructor.getDishCombo(dishTypes, numberOfCombos);
+        for (int i = 0; i < resultList.size(); i++) {
+            System.out.println("Комбо " + (i + 1));
+            System.out.println(resultList.get(i).toString());
         }
     }
 }
